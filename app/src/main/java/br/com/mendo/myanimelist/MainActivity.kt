@@ -12,9 +12,9 @@ import br.com.mendo.myanimelist.data.model.Anime
 import br.com.mendo.myanimelist.presentation.AnimeDetailsScreen
 import br.com.mendo.myanimelist.presentation.FavoritesScreen
 import br.com.mendo.myanimelist.presentation.PopularAnimesScreen
-import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.AndroidEntryPoint
 
-@HiltAndroidApp
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
