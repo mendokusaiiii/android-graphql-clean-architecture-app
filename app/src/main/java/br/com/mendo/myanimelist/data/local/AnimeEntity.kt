@@ -9,4 +9,5 @@ data class AnimeEntity(
     val title: String,
     val synopsis: String,
     val imageUrl: String,
+    val cachedAt: Long = System.currentTimeMillis()
 )

@@ -31,7 +31,7 @@ object AppModule {
             context,
             AnimeDatabase::class.java,
             "anime_db"
-        ).build()
+        ).addMigrations(AnimeDatabase.MIGRATION_1_2).build()
     }
 
     @Provides
