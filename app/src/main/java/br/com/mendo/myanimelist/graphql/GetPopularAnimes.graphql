@@ -1,0 +1,14 @@
+query GetPopularAnimes($page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    media(type: ANIME, sort: POPULARITY_DESC) {
+      id
+      title {
+        romaji
+      }
+      description
+      coverImage {
+        large
+      }
+    }
+  }
+}

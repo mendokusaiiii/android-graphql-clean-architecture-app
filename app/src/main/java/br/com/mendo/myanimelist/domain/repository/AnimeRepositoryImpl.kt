@@ -3,15 +3,23 @@ package br.com.mendo.myanimelist.domain.repository
 import br.com.mendo.myanimelist.data.local.AnimeDao
 import br.com.mendo.myanimelist.data.local.AnimeEntity
 import br.com.mendo.myanimelist.data.model.Anime
-import br.com.mendo.myanimelist.data.remote.JikanApi
+import com.apollographql.apollo3.ApolloClient
 import javax.inject.Inject
 
 class AnimeRepositoryImpl @Inject constructor(
-    private val api: JikanApi,
+    private val apolloClient: ApolloClient,
     private val dao: AnimeDao
 ): AnimeRepository {
     override suspend fun getPopularAnimes(): List<Anime> {
-        return api.getTopAnimes().top.map { it.toDomain() }
+        val response = apolloClient.query(GetPopularAnimesQuery(page = 1, perPage = 10)).execute()
+        return response.data?.Page?.media?.mapNotNull { media ->
+            Anime(
+                id = media?.id ?: return@mapNotNull null,
+                title = media.title?.romaji ?: "",
+                synopsis = media.description ?: "",
+                imageUrl = media.coverImage?.large ?: ""
+            )
+        } ?: emptyList()
     }
 
     override suspend fun getFavoriteAnimes(): List<Anime> {

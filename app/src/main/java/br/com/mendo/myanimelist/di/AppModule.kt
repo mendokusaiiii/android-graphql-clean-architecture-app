@@ -5,6 +5,7 @@ import androidx.room.Room
 import br.com.mendo.myanimelist.data.local.AnimeDao
 import br.com.mendo.myanimelist.data.local.AnimeDatabase
 import br.com.mendo.myanimelist.data.remote.JikanApi
+import com.apollographql.apollo3.ApolloClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,12 +20,8 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun providesJikanApi(): JikanApi {
-         return Retrofit.Builder()
-             .baseUrl("https://api.jikan.moe/v4/")
-             .addConverterFactory(GsonConverterFactory.create())
-             .build()
-             .create(JikanApi::class.java)
+    fun provideApolloClient(): ApolloClient {
+         return ApolloClient.Builder().serverUrl("https://graphql.anilist.co").build()
     }
 
     @Provides

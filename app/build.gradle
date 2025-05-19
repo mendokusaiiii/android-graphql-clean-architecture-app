@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id 'com.google.dagger.hilt.android' version '2.56' apply false
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -65,6 +66,8 @@ dependencies {
     implementation "androidx.room:room-ktx:2.7.1"
     implementation "com.squareup.retrofit2:retrofit:2.11.0"
     implementation "com.squareup.retrofit2:converter-gson:2.11.0"
+    implementation "com.apollographql.apollo3:apollo-runtime:3.8.5"
+    implementation "com.apollographql.apollo3:apollo-api:3.8.5"
     testImplementation "junit:junit:4.13.2"
     implementation "io.coil-kt:coil-compose:2.7.0"
 }
